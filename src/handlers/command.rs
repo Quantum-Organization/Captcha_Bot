@@ -3,6 +3,6 @@ use super::commands;
 
 pub fn register_commands() -> Vec<CreateCommand> {
     vec![
-        commands::base::register(),
+        commands::setup::register(),
     ]
 }

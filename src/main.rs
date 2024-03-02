@@ -1,8 +1,9 @@
 use dotenv::dotenv;
 use serenity::{all::GatewayIntents, Client};
 use std::env;
-
+use std::collections::HashMap;
 use captcha_bot::handlers::event::Handler;
+use captcha_bot::models::client_data::Data;
 
 #[tokio::main]
 async fn main() {
@@ -15,7 +16,10 @@ async fn main() {
         .await
         .expect("[❌] - Error creating client!");
 
-    if let Err(err) = client.start().await {
-        println!("[❌] - Client error: {err:?}");
+    {
+        let mut client_data = client.data.write().await;
+        client_data.insert::<Data>(HashMap::new());
     }
+
+    client.start().await.expect("[❌] - Error running client!");
 }
