@@ -12,7 +12,8 @@ pub async fn run(ctx: Context, interaction: ModalInteraction) {
 
     if code.is_none() {
         let message = CreateInteractionResponseMessage::new()
-            .content("Captcha não encontrado, tente criar um novo!");
+            .content("Captcha não encontrado, tente criar um novo!")
+            .flags(InteractionResponseFlags::EPHEMERAL);
 
         let reply = CreateInteractionResponse::Message(message);
 
