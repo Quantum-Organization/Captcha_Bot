@@ -6,6 +6,7 @@ use serenity::all::{
 pub async fn run(ctx: Context, interaction: ComponentInteraction) {
     let mut data = ctx.data.write().await;
     let codes = data.get_mut::<Data>().unwrap();
+    let user_id = interaction.user.id.get().clone();
 
     let code = rand::random::<u32>()
         .to_string()
@@ -15,8 +16,8 @@ pub async fn run(ctx: Context, interaction: ComponentInteraction) {
 
     let generate_image = draw_text(&code);
     
-    if codes.contains_key(&interaction.user.id.get().clone()) {
-        codes.remove(&interaction.user.id.get().clone());
+    if codes.contains_key(&user_id) {
+        codes.remove(&user_id);
     }
     
     codes.insert(interaction.user.id.get().clone(), code);
