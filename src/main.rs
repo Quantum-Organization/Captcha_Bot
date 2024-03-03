@@ -1,4 +1,5 @@
 use dotenv::dotenv;
+use serenity::all::{CreateAttachment, EditProfile};
 use serenity::{all::GatewayIntents, Client};
 use std::env;
 use std::collections::HashMap;
@@ -21,5 +22,11 @@ async fn main() {
         client_data.insert::<Data>(HashMap::new());
     }
 
+    let avatar = CreateAttachment::url(&client.http, "https://cdn.dribbble.com/users/6985884/screenshots/15849023/media/6dfb9f3caf75d8b6acc1f9bde6b885fa.gif").await.unwrap();
+
+    let edit = EditProfile::default()
+        .avatar(&avatar);
+
+    client.http.edit_profile(&edit).await.unwrap();
     client.start().await.expect("[❌] - Error running client!");
 }
