@@ -3,7 +3,7 @@ use std::vec;
 use serenity::all::{
     ButtonStyle, Colour, CommandInteraction, Context, CreateActionRow, CreateButton, CreateCommand,
     CreateEmbed, CreateInteractionResponse, CreateInteractionResponseMessage, CreateMessage,
-    InteractionResponseFlags,
+    InteractionResponseFlags, Permissions,
 };
 
 pub async fn run(ctx: Context, command: CommandInteraction) {
@@ -41,5 +41,5 @@ pub async fn run(ctx: Context, command: CommandInteraction) {
 }
 
 pub fn register() -> CreateCommand {
-    CreateCommand::new("setup").description("Setup the captcha system.")
+    CreateCommand::new("setup").description("Setup the captcha system.").default_member_permissions(Permissions::MANAGE_GUILD)
 }
